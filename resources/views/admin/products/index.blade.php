@@ -30,7 +30,7 @@
                     <td><img width="100" src="{{$product->image}}" alt=""></td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
-                    <td><a href="{{route('admin.products.show', $product->id)}}"><i class="fas fa-eye"></i> </a> - <i class="fas fa-edit"> - delete</i></td>
+                    <td><a href="{{route('admin.products.show', $product->id)}}"><i class="fas fa-eye"></i> </a> - <a href="{{route('admin.products.edit', $product->id)}}"><i class="fas fa-edit"> </i></a>- delete</td>
                 </tr>                
             @endforeach
 
