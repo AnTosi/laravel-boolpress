@@ -111,6 +111,6 @@ class ProductController extends Controller
     {
         //
         $product->delete();
-        return redirect()->route('admin.products.index')->with('feedback', 'Game succesfully deleted');
+        return redirect()->route('admin.products.index')->with('feedback', 'Product succesfully deleted');
     }
 }
