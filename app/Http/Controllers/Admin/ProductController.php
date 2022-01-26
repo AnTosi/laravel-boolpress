@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
@@ -86,6 +87,18 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        $validated_data = $request->validate([
+            'name' => ['required',
+            Rule::unique('products')->ignore($product->id),
+        ],
+            'image' => 'nullable',
+            'price' => 'nullable',
+            'description' => 'nullable' 
+        ]);
+
+        $product->update($validated_data);
+
+        return redirect()->route('admin.products.index')->with('feedback', 'Product successfully modified');
     }
 
     /**
