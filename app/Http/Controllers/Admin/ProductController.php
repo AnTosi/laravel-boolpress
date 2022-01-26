@@ -61,6 +61,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        return view('guests.products.show', compact('product'));
     }
 
     /**
