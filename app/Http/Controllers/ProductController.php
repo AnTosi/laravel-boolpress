@@ -15,8 +15,8 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $product = Product::orderBy('id', 'desc')->paginate(20);
-        return view('guests.products.index', compact('product'));
+        $products = Product::orderBy('id', 'desc')->paginate(20);
+        return view('guest.products.index', compact('products'));
     }
 
 
@@ -29,6 +29,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        
     }
 
  
