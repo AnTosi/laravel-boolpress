@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('guest.welcome');
 })->name('home');
 
+Route::resource('products', ProductController::class)->only(['index', 'show']);
+
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home');
