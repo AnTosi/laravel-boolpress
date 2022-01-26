@@ -30,7 +30,31 @@
                     <td><img width="100" src="{{$product->image}}" alt=""></td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->price}}</td>
-                    <td><a href="{{route('admin.products.show', $product->id)}}"><i class="fas fa-eye"></i> </a> - <a href="{{route('admin.products.edit', $product->id)}}"><i class="fas fa-edit"> </i></a>- delete</td>
+                    <td><a href="{{route('admin.products.show', $product->id)}}"><i class="fas fa-eye"></i> </a> - <a href="{{route('admin.products.edit', $product->id)}}"><i class="fas fa-edit"> </i></a> !-- Modal -->
+                        <div class="modal fade" id="delete{{$game->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-{{$product->id}}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Delete Game {{$product->name}}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Attention, deleted products cannot be recovered.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <form action="{{route('admin.games.destroy', $product->id)}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                 </tr>                
             @endforeach
 
