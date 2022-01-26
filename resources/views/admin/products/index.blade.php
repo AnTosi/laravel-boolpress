@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach($products as $product)
+            @foreach($products as $product)
                 <tr>
                     <td scope="row">{{$product->id}}</td>
                     <td><img width="100" src="{{$product->image}}" alt=""></td>
@@ -20,9 +20,8 @@
                     <td>{{$product->price}}</td>
                     <td><i class="fas fa-eye"> - <i class="fas fa-edit"> - delete</i></i></td>
                 </tr>                
-            @endforeach --}}
+            @endforeach
 
-            
         </tbody>
     </table>
     
