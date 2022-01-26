@@ -1,6 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
+
+<h1>Products</h1>
+
+<div>
+    @if (session('feedback'))
+        <div class="alert alert-success my-3 ">
+            {{ session('feedback') }}
+        </div>
+    @endif
+</div>
+
+<a name="" id="" class="btn btn-primary" href="{{route('admin.products.create')}}" role="button">Create product</a>
     <table class="table">
         <thead>
             <tr>
