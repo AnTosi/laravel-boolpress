@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Product;
+use Faker\Generator as Faker;
 
 class ProductSeeder extends Seeder
 {
@@ -9,8 +11,17 @@ class ProductSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
         //
+        for ($i=0; $i < 15; $i++) { 
+            $product = new Product();
+            $product->name = $faker->sentence();
+            $product->image = $faker->imageUrl(600, 400, 'Products', $product->name);
+            $product->price = $faker->randomFloat(2, 100, 200);
+            $product->description = $faker->text();
+            $product->save();
+        }
+
     }
 }
