@@ -6,15 +6,15 @@
 
     @include('partials.error')
 
-    <form action="{{route('admin.posts.update', $post->id)}}" method="post">
+    <form action="{{route('admin.posts.update', $post->slug)}}" method="post">
         @csrf
         @method('PUT')
 
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control  @error('name') is-invalid @enderror" placeholder="" aria-describedby="nameHelper" value="{{$post->name}}">
-            <small id="nameHelper" class="text-muted">Type the post name</small>
-            @error('name')
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" id="title" class="form-control  @error('title') is-invalid @enderror" placeholder="" aria-describedby="titleHelper" value="{{$post->title}}">
+            <small id="titleHelper" class="text-muted">Type the post title</small>
+            @error('title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
@@ -29,19 +29,19 @@
         </div>
 
         <div class="mb-3">
-            <label for="price" class="form-label">Price</label>
-            <input type="number" step="0.01" name="price" id="price" class="form-control @error('price') is-invalid @enderror" placeholder="" aria-describedby="priceHelper" value="{{$post->price}}">
-            <small id="priceHelper" class="text-muted">Type the post price</small>
-            @error('price')
+            <label for="sub_title" class="form-label">Sub Title</label>
+            <input type="text" name="sub_title" id="sub_title" class="form-control @error('sub_title') is-invalid @enderror" placeholder="" aria-describedby="sub_titleHelper" value="{{$post->sub_title}}">
+            <small id="sub_titleHelper" class="text-muted">Type the post Sub Title</small>
+            @error('sub_title')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
 
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="6" aria-describedby="descriptionHelper" value="{{$post->description}}"></textarea>
-            <small id="descriptionHelper" class="text-muted">Type the post description</small>
-            @error('description')
+            <label for="body" class="form-label">Text</label>
+            <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="6" aria-describedby="bodyHelper">{{$post->body}}</textarea>
+            <small id="bodyHelper" class="text-muted">Type the post text</small>
+            @error('body')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
