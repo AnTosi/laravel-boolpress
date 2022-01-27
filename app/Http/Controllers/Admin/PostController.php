@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -42,6 +42,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        ddd($request->all);
 
         $validated_data = $request->validate([
             'title' => ['required', 'unique:posts', 'max:200'],
@@ -64,6 +65,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        // return view('guest.posts.show', compact('post'));
     }
 
     /**

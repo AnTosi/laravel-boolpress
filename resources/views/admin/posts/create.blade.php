@@ -19,7 +19,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="sub_title" class="form-label">sub_title</label>
+            <label for="sub_title" class="form-label">Sub title</label>
             <input type="text" name="sub_title" id="sub_title" class="form-control @error('sub_title') is-invalid @enderror" placeholder="" aria-describedby="sub_titleHelper" value="{{old('sub_title')}}">
             <small id="sub_titleHelper" class="text-muted">Type the post sub title</small>
             @error('sub_title')

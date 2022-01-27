@@ -18,9 +18,8 @@
             <tr>
                 <th>ID</th>
                 <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>Title</th>
+                <th>Slug</th>
             </tr>
         </thead>
         <tbody>
@@ -28,21 +27,22 @@
                 <tr>
                     <td scope="row">{{$post->id}}</td>
                     <td><img width="100" src="{{$post->image}}" alt=""></td>
-                    <td>{{$post->name}}</td>
-                    <td>{{$post->price}}</td>
+                    <td>{{$post->title}}</td>
+                    <td>{{$post->sub_title}}</td>
+                    <td>{{$post->slug}}</td>
                     <td>
-                        <a href="{{route('admin.posts.show', $post->id)}}"><i class="fas fa-eye"></i></a>
-                        <a href="{{route('admin.posts.edit', $post->id)}}"><i class="fas fa-edit"></i></a>
-                        <button title="delete" type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#delete{{$post->id}}">
+                        <a href="{{route('posts.show', $post->slug)}}"><i class="fas fa-eye"></i></a>
+                        <a href="{{route('admin.posts.edit', $post->slug)}}"><i class="fas fa-edit"></i></a>
+                        <button title="delete" type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#delete{{$post->slug}}">
                             <i class="fas fa-trash"></i>
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="delete{{$post->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-{{$post->id}}" aria-hidden="true">
+                        <div class="modal fade" id="delete{{$post->slug}}" tabindex="-1" role="dialog" aria-labelledby="modal-{{$post->slug}}" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Delete post {{$post->name}}</h5>
+                                        <h5 class="modal-title">Delete post {{$post->slug}}</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <form action="{{route('admin.posts.destroy', $post->id)}}" method="post">
+                                            <form action="{{route('admin.posts.destroy', $post->slug)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                 
