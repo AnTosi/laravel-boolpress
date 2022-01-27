@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     //
-    protected $fillable = ['title', 'slug', 'image', 'sub_title', 'body'];
+    protected $fillable = ['title', 'slug', 'image', 'sub_title', 'body', 'category_id'];
 
     public function getRouteKeyName()
     {
