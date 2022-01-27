@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -28,6 +30,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('admin.posts.create');
     }
 
     /**
@@ -39,6 +42,17 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+
+        $validated_data = $request->validate([
+            'title' => ['required', 'unique:posts', 'max:200'],
+            'sub_title' => ['nullable'],
+            'image' => ['nullable'],
+            'body' => ['nullable']
+        ]);
+
+        $validated_data['slug'] = Str::slug($validated_data['title']);
+        Post::create($validated_data);
+        return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully created');
     }
 
     /**
@@ -58,9 +72,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Post $post)
     {
         //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -73,6 +88,17 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        
+        $validated_data = $request->validate([
+            'title' => ['required', Rule::unique('posts')->ignore('$post->id'), 'max:200'],
+            'sub_title' => ['nullable'],
+            'image' => ['nullable'],
+            'body' => ['nullable']
+        ]);
+
+        $validated_data['slug'] = Str::slug($validated_data['title']);
+        $post->update($validated_data);
+        return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully modified');
     }
 
     /**
@@ -84,5 +110,8 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index')->with('feedback', 'post succesfully deleted');
     }
 }
