@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <h4 class="card-title">{{$post->title}}</h4>
                             <p class="card-text"> {{$post->sub_title}}</p>
-                            <a href="{{route('posts.show', $post->id)}}">View post </a>
+                            <a href="{{route('posts.show', $post->slug)}}">View post</a>
                         </div>
                     </div>
                 </div>
