@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
 {
@@ -12,7 +13,12 @@ class Post extends Model
     public function getRouteKeyName()
     {
         # code...
-        return 'slug';
+        return 'slug'; 
     }
 
+    public function category(): BelongsTo
+    {
+        # code...
+        return $this->belongsTo(Category::class);
+    }
 }
