@@ -39,6 +39,16 @@
         </div>
 
         <div class="mb-3">
+            <label for="category_id" class="form-label">Categories</label>
+            <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
+              <option value="">Uncategorized</option>
+              @foreach ($categories as $category)
+                  <option value="{{$category->id}}" {{ $category->id === $post->category->id ? 'selected' : ''}}>{{$category->name}}</option>
+              @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
             <label for="body" class="form-label">Text</label>
             <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="6" aria-describedby="bodyHelper">{{$post->body}}</textarea>
             <small id="bodyHelper" class="text-muted">Type the post text</small>
