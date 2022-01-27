@@ -19,6 +19,7 @@
                 <th>ID</th>
                 <th>Image</th>
                 <th>Title</th>
+                <th>Category</th>
                 <th>Sub Title</th>
                 <th>Slug</th>
             </tr>
@@ -29,6 +30,7 @@
                     <td scope="row">{{$post->id}}</td>
                     <td><img width="100" src="{{$post->image}}" alt=""></td>
                     <td>{{$post->title}}</td>
+                    <td>{{ $post->category != null ? $post->category->name : 'Uncategorized' }}</td>
                     <td>{{$post->sub_title}}</td>
                     <td>{{$post->slug}}</td>
                     <td>
