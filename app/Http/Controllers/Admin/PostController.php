@@ -79,7 +79,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -97,7 +98,8 @@ class PostController extends Controller
             'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:200'],
             'sub_title' => ['nullable'],
             'image' => ['nullable'],
-            'body' => ['nullable']
+            'body' => ['nullable'],
+            'category_id' => ['nullable', 'exists:categories,id']
         ]);
 
         $validated_data['slug'] = Str::slug($validated_data['title']);
