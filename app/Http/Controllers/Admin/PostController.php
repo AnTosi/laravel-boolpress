@@ -92,7 +92,7 @@ class PostController extends Controller
         //
         
         $validated_data = $request->validate([
-            'title' => ['required', Rule::unique('posts')->ignore($post->slug), 'max:200'],
+            'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:200'],
             'sub_title' => ['nullable'],
             'image' => ['nullable'],
             'body' => ['nullable']

@@ -21,6 +21,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
+            <img width="150" class="m-3" src="{{$post->image}}" alt="">
             <input type="text" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="" aria-describedby="imageHelper" value="{{$post->image}}">
             <small id="imageHelper" class="text-muted">Type the Image url</small>
             @error('image')
