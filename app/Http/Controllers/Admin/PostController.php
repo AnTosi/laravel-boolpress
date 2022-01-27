@@ -44,13 +44,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        // ddd($request->all);
+        // ddd($request->all());
 
         $validated_data = $request->validate([
             'title' => ['required', 'unique:posts', 'max:200'],
             'sub_title' => ['nullable'],
             'image' => ['nullable'],
-            'body' => ['nullable']
+            'body' => ['nullable'],
+            'category_id' => ['nullable', 'exists:categories,id']
         ]);
 
         $validated_data['slug'] = Str::slug($validated_data['title']);
@@ -80,7 +81,7 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('admin.posts.edit', compact('categories'));
     }
 
     /**
