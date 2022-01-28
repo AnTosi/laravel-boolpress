@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -21,6 +22,7 @@ Route::resource('products', ProductController::class)->only(['index', 'show']);
 Route::resource('posts', PostController::class)->only(['index', 'show'])->parameter('posts', 'post:slug');
 
 Route::get('categories/{category:slug}/posts', 'CategoryController@posts')->name('categories.posts');
+
 Auth::routes();
 
 Route::get('/admin', 'HomeController@index')->name('home');
@@ -31,4 +33,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('products', ProductController::class);
     Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
 });
