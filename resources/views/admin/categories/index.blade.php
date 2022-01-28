@@ -9,6 +9,7 @@
             {{ session('feedback') }}
         </div>
         @endif
+        @include('partials.error')
         <div class="col-md-6 mr-auto ml-5">
             <h3 class="mb-4">Current Categories:</h3>
                 <ul class="list-group">
@@ -41,11 +42,10 @@
             <form action="{{route('admin.categories.store')}}" method="post">
             @csrf
             <div>
-                @include('partials.error')
                 <div class="mb-3">
                     <h3 class="mb-4">Add a category</h3>
                     <label for="name" class="form-label">Category name:</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Category name" aria-describedby="nameHelper">
+                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Category name" aria-describedby="nameHelper">
                     <small id="nameHelper" class="text-muted">Type the category name, maximum 200 characters</small>
                 </div>
                 <button type="submit" class="btn btn-dark">Add category</button>
