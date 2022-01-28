@@ -11,17 +11,20 @@
         <div class="row">
             @forelse($posts as $post)
             <div class="col-3">
-                <div class="card">
-                    <img class="card-img-top" src="{{$post->image}}" alt="{{$post->title}} image">
-                    <div class="card-body">
-                        <h4 class="card-title">{{$post->title}}</h4>
-                        <p class="card-text">{{$post->sub_title}}</p>
+                <a href="{{route('posts.show', $post->slug)}}" class="metadata">
+                    <div class="card">
+                        <img class="card-img-top" src="{{$post->image}}" alt="{{$post->title}} image">
+                        <div class="card-body">
+                            <h4 class="card-title">{{$post->title}}</h4>
+                            <p class="card-text">{{$post->sub_title}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>                
             </div>
+        
             @empty
                 <div class="col">
-                    <p>Sorry, seems like there are no posts inside the {{$category->name}} category</p>
+                    <p>Sorry, it seems like there are no posts inside the {{$category->name}} category</p>
                 </div>
             @endempty
         </div>
