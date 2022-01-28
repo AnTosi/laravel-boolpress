@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -21,16 +22,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -39,6 +30,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $validated_data = $request->validate([
+            'name' => 'required | unique:categories'
+        ]);
+        $validated_data['slug'] = Str::slug($request->name);
+
+        Category::create($validated_data);
+
+        return redirect()->back()->with('feedback', 'Category successfully created');
+
     }
 
     /**
