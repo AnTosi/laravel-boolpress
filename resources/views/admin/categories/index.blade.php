@@ -41,6 +41,7 @@
             <form action="{{route('admin.categories.store')}}" method="post">
             @csrf
             <div>
+                @include('partials.error')
                 <div class="mb-3">
                     <h3 class="mb-4">Add a category</h3>
                     <label for="name" class="form-label">Category name:</label>
