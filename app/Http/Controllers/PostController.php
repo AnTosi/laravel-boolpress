@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class PostController extends Controller
 {
@@ -16,7 +17,8 @@ class PostController extends Controller
     {
         //
         $posts = Post::orderByDesc('id')->paginate(9);
-        return view('guest.posts.index', compact('posts')); 
+        $categories = Category::all();
+        return view('guest.posts.index', compact('posts', 'categories')); 
     }
 
 
