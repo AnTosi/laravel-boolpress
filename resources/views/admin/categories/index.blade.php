@@ -4,6 +4,11 @@
 
     <h1 class="mt-3 mb-5">Categories</h1>
     <div class="row my-5">
+        @if (session('feedback'))
+        <div class="alert alert-success my-3 ">
+            {{ session('feedback') }}
+        </div>
+        @endif
         <div class="col-md-6 mr-auto ml-5">
             <h3 class="mb-4">Current Categories:</h3>
                 <ul class="list-group">

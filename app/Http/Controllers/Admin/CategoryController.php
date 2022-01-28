@@ -73,6 +73,15 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         //
+        $validated_data = $request->validate([
+            'name' => 'required | unique:categories'
+        ]);
+        $validated_data['slug'] = Str::slug($request->name);
+
+        $category->update($validated_data);
+
+        return redirect()->back()->with('feedback', 'Category successfully changed');
+
     }
 
     /**
@@ -84,5 +93,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+        $category->delete();
+        return redirect()->back()->with('feedback', 'Category successfully deleted');
     }
 }
