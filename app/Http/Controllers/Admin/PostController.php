@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -35,7 +36,8 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -49,18 +51,32 @@ class PostController extends Controller
         //
         // ddd($request->all());
 
+
         $validated_data = $request->validate([
             'title' => ['required', 'unique:posts', 'max:200'],
             'sub_title' => ['nullable'],
             'image' => ['nullable'],
             'body' => ['nullable'],
-            'category_id' => ['nullable', 'exists:categories,id']
+            'category_id' => ['nullable', 'exists:categories,id'],
         ]);
+
+        if($request->has('tags')) {
+            $request->validate([
+                'tags'=> ['nullable', 'exists:tags,id']
+            ]);
+        }
+
+        // ddd($validated_data);
+        // ddd($request->tags);
 
         $validated_data['slug'] = Str::slug($validated_data['title']);
 
         $validated_data['user_id'] = Auth::id();
-        Post::create($validated_data);
+ 
+        $_post = Post::create($validated_data);
+        $_post->tags()->attach($request->tags);
+        
+
         return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully created');
     }
 
