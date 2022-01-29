@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +20,9 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::orderByDesc('id')->paginate(9);
+        // $posts = Post::orderByDesc('id')->paginate(9);
+
+        $posts = Auth::user()->posts()->orderByDesc('id')->paginate(9);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -55,6 +58,8 @@ class PostController extends Controller
         ]);
 
         $validated_data['slug'] = Str::slug($validated_data['title']);
+
+        $validated_data['user_id'] = Auth::id();
         Post::create($validated_data);
         return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully created');
     }

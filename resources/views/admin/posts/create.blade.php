@@ -41,14 +41,16 @@
           <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id">
             <option value="" selected="selected">Select a category</option>
             @foreach ($categories as $category)
-                <option value="{{$category->id}}">{{$category->id == old('category', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
+                <option value="{{$category->id}}" >
+                    {{$category->name}}
+                </option>
             @endforeach
           </select>
         </div>
         <div class="mb-3">
             <label for="body" class="form-label">Text</label>
-            <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="6" aria-describedby="bodyHelper" value="{{old('body')}}"></textarea>
-            <small id="bodyHelper" class="text-muted">Type the post text</small>
+            <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="6" aria-describedby="bodyHelper" value="">{{old('body')}}</textarea>
+            <small id="bodyHelper" class="body-muted">Type the post text</small>
             @error('body')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
