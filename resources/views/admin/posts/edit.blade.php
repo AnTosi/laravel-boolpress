@@ -51,9 +51,9 @@
         <div class="mb-3">
             <label for="tags" class="form-label">Tags</label>
             <select multiple class="form-select" name="tags[]" id="tags">
-            <option disabled>Select all tags</option>
+            <option disabled>Select as many tags as you want</option>
             @foreach ($tags as $tag)
-                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                <option value="{{$tag->id}}" {{$post->tags->contains($tag->id) ? 'selected' : ''}}>{{$tag->name}}</option>
             @endforeach
             
             </select>
