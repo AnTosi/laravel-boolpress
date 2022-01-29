@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -16,7 +17,8 @@ class CategoryController extends Controller
     {
         # code...
         $posts = $category->posts()->orderByDesc('id')->paginate(10);
-        return view('guest.categories.posts', compact('posts', 'category'));
+        $tags = Tag::all();
+        return view('guest.categories.posts', compact('posts', 'category', 'tags'));
     }
 
 
