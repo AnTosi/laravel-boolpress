@@ -26,7 +26,7 @@
         
             @empty
                 <div class="col">
-                    <p>Sorry, it seems like there are no posts inside the {{$category->name}} category</p>
+                    <p>Sorry, it seems like there are no posts with the {{$tag->name}} tag</p>
                 </div>
             @endempty
         </div>
