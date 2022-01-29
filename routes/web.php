@@ -22,6 +22,8 @@ Route::resource('products', ProductController::class)->only(['index', 'show']);
 Route::resource('posts', PostController::class)->only(['index', 'show'])->parameter('posts', 'post:slug');
 
 Route::get('categories/{category:slug}/posts', 'CategoryController@posts')->name('categories.posts');
+Route::get('tags/{tag:slug}/posts', 'TagController@posts')->name('tags.posts');
+
 
 Auth::routes();
 
