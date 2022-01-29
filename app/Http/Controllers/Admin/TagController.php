@@ -41,7 +41,7 @@ class TagController extends Controller
     {
         //
         $validated_data = $request->validate([
-            'name' => 'required | unique:categories'
+            'name' => 'required | unique:tags'
         ]);
         $validated_data['slug'] = Str::slug($request->name);
 
@@ -83,7 +83,7 @@ class TagController extends Controller
     {
         //
         $validated_data = $request->validate([
-            'name' => 'required | unique:categories'
+            'name' => 'required | unique:tags'
         ]);
         $validated_data['slug'] = Str::slug($request->name);
 
