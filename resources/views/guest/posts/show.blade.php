@@ -20,7 +20,7 @@
             @if($post->tags)
             <p> Tags:
                 @forelse ($post->tags as $tag)
-                    <span class="tag mx-1"><a href="#">{{$tag->name}}</a></span>
+                    <span class="tag mx-1"><a href="{{route('tags.posts', $tag->slug)}}">{{$tag->name}}</a></span>
                 @empty
                     <span>Not tagged</span>
                 @endforelse
