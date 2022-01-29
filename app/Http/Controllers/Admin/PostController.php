@@ -86,7 +86,14 @@ class PostController extends Controller
     {
         //
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+
+        if(Auth::id() === $post->user_id) {
+            return view('admin.posts.edit', compact('post', 'categories'));
+        }
+
+        else {
+            abort(403);
+        }
     }
 
     /**
@@ -99,18 +106,25 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
-        
-        $validated_data = $request->validate([
-            'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:200'],
-            'sub_title' => ['nullable'],
-            'image' => ['nullable'],
-            'body' => ['nullable'],
-            'category_id' => ['nullable', 'exists:categories,id']
-        ]);
+        if(Auth::id() === $post->user_id) {
+            $validated_data = $request->validate([
+                'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:200'],
+                'sub_title' => ['nullable'],
+                'image' => ['nullable'],
+                'body' => ['nullable'],
+                'category_id' => ['nullable', 'exists:categories,id']
+            ]);
 
-        $validated_data['slug'] = Str::slug($validated_data['title']);
-        $post->update($validated_data);
-        return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully modified');
+            $validated_data['slug'] = Str::slug($validated_data['title']);
+
+            $post->update($validated_data);
+            return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully modified');    
+        }
+
+        else {
+            abort(403);
+        }
+        
     }
 
     /**
@@ -122,8 +136,14 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
-        $post->delete();
+        if(Auth::id() === $post->user_id) {
+            $post->delete();
+    
+            return redirect()->route('admin.posts.index')->with('feedback', 'post succesfully deleted');            
+        }
 
-        return redirect()->route('admin.posts.index')->with('feedback', 'post succesfully deleted');
+        else {
+            abort(403);
+        }
     }
 }
