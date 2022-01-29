@@ -15,6 +15,18 @@
                 @endif
             </h4>
         </div>
+        <div class="category">
+
+            @if($post->tags)
+            <p> Tags:
+                @forelse ($post->tags as $tag)
+                    <span class="tag mx-1"><a href="#">{{$tag->name}}</a></span>
+                @empty
+                    <span>Not tagged</span>
+                @endforelse
+            </p>                
+            @endif
+        </div>
         <div>
             <p class="card-text">{{$post->body}}</p>
         </div>

@@ -32,7 +32,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        return view('guest.posts.show', compact('post'));
+        $tags = Tag::all();
+        return view('guest.posts.show', compact('post', 'tags'));
     }
 
 }
