@@ -60,11 +60,7 @@ class PostController extends Controller
             'category_id' => ['nullable', 'exists:categories,id'],
         ]);
 
-        if($request->has('tags')) {
-            $request->validate([
-                'tags'=> ['nullable', 'exists:tags,id']
-            ]);
-        }
+
 
         // ddd($validated_data);
         // ddd($request->tags);
@@ -74,6 +70,11 @@ class PostController extends Controller
         $validated_data['user_id'] = Auth::id();
  
         $_post = Post::create($validated_data);
+        if($request->has('tags')) {
+            $request->validate([
+                'tags'=> ['nullable', 'exists:tags,id']
+            ]);
+        }
         $_post->tags()->attach($request->tags);
         
 
@@ -129,12 +130,18 @@ class PostController extends Controller
                 'sub_title' => ['nullable'],
                 'image' => ['nullable'],
                 'body' => ['nullable'],
-                'category_id' => ['nullable', 'exists:categories,id']
+                'category_id' => ['nullable', 'exists:categories,id'],  
             ]);
 
             $validated_data['slug'] = Str::slug($validated_data['title']);
 
             $post->update($validated_data);
+            if($request->has('tags')){
+                $request->validate([
+                    'tags' => ['nullable', 'exists:tags,id']
+                ]);
+                $post->tags()->sync($request->tags);
+            }
             return redirect()->route('admin.posts.index')->with('feedback', 'Post succesfully modified');    
         }
 
