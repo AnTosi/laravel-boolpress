@@ -20,8 +20,6 @@ class CategorySeeder extends Seeder
             $cate->name = $category;
             $cate->slug = Str::slug($category);
             $cate->save();
-
-
         }
     }
 }
