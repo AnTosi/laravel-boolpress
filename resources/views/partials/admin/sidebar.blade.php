@@ -29,7 +29,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{route('admin.tags.index')}}">
-            <i class="fas fa-bookmark"></i>
+            <i class="fas fa-hashtag"></i>
             Tags
           </a>
         </li>
