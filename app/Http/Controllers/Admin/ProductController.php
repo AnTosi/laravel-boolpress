@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::orderBy('id', 'desc')->paginate(20);
+        $products = Auth::user()->products()->orderBy('id', 'desc')->paginate(20);
         return view('admin.products.index', compact('products'));
     }
 
