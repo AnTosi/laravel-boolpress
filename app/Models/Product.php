@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     //
-    protected $fillable = ['name', 'image', 'price', 'description'];
+    protected $fillable = ['name', 'image', 'price', 'description', 'user_id'];
 
     /**
      * Get the user that owns the Product
