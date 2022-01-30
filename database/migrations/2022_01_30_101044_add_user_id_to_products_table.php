@@ -16,7 +16,7 @@ class AddUserIdToProductsTable extends Migration
         Schema::table('products', function (Blueprint $table) {
             //
             $table->unsignedBigInteger('user_id')->nullable()->after('id');
-            $table->foreign('user_id')->references('id')->on('user')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 
