@@ -49,7 +49,10 @@ class ProductController extends Controller
             'description' => 'nullable' 
         ]);
 
+        $validated_data['user_id'] = Auth::id();
+        
         Product::create($validated_data);
+
 
         return redirect()->route('admin.products.index')->with('feedback', 'Product successfully created');
     }
