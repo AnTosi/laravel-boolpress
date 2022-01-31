@@ -6,7 +6,7 @@
 
     @include('partials.error')
 
-    <form action="{{route('admin.posts.store')}}" method="post">
+    <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -29,7 +29,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
-            <input type="text" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="" aria-describedby="imageHelper" value="{{old('image')}}">
+            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="" aria-describedby="imageHelper" accept=".jpg,.png">
             <small id="imageHelper" class="text-muted">Type the Image url</small>
             @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>

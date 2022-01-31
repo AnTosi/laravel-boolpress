@@ -6,7 +6,7 @@
 
     @include('partials.error')
 
-    <form action="{{route('admin.posts.update', $post->slug)}}" method="post">
+    <form action="{{route('admin.posts.update', $post->slug)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -20,10 +20,13 @@
         </div>
 
         <div class="mb-3">
+            <div>
+                <img src="{{asset('storage/' . $post->image)}}" alt="">
+            </div>
             <label for="image" class="form-label">Image</label>
-            <img width="150" class="m-3" src="{{$post->image}}" alt="">
-            <input type="text" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="" aria-describedby="imageHelper" value="{{$post->image}}">
-            <small id="imageHelper" class="text-muted">Type the Image url</small>
+            <img width="150" class="m-3" src="{{asset('storage/' . $post->image)}}" alt="">
+            <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" placeholder="" aria-describedby="imageHelper">
+            <small id="imageHelper" class="text-muted">Update your img, only jpg and png below 500kB are accepted</small>
             @error('image')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror           

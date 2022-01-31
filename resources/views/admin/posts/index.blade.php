@@ -28,7 +28,7 @@
             @foreach($posts as $post)
                 <tr>
                     <td scope="row">{{$post->id}}</td>
-                    <td><img width="100" src="{{$post->image}}" alt=""></td>
+                    <td><img width="100" src="{{asset('storage/' . $post->image)}}" alt=""></td>
                     <td>{{$post->title}}</td>
                     <td>{{ $post->category != null ? $post->category->name : 'Uncategorized' }}</td>
                     <td>{{$post->sub_title}}</td>

@@ -14,7 +14,7 @@
             <div class="col-3">
                 <a href="{{route('posts.show', $post->slug)}}" class="metadata">
                     <div class="card">
-                        <img class="card-img-top" src="{{$post->image}}" alt="{{$post->title}} image">
+                        <img class="card-img-top" src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}} image">
                         <div class="card-body">
                             <h4 class="card-title">{{$post->title}}</h4>
                             <p class="card-text">{{$post->sub_title}}</p>

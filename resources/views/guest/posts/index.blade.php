@@ -7,7 +7,7 @@
             @foreach ($posts as $post)
                 <div class="col-md-4">
                     <div class="card">
-                        <img class="card-img-top" height="165" src="{{$post->image}}" alt="{{$post->title}} image">
+                        <img class="card-img-top" height="165" src="{{asset('storage/' . $post->image)}}" alt="{{$post->title}} image">
                         <div class="card-body">
                             <h4 class="card-title">{{$post->title}}</h4>
                             <p class="card-text"> {{$post->sub_title}}</p>
