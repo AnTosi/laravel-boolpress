@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -55,12 +56,17 @@ class PostController extends Controller
         $validated_data = $request->validate([
             'title' => ['required', 'unique:posts', 'max:200'],
             'sub_title' => ['nullable'],
-            'image' => ['nullable'],
+            'image' => ['nullable', 'image', 'max:500'],
             'body' => ['nullable'],
             'category_id' => ['nullable', 'exists:categories,id'],
         ]);
 
+        if ($request->file('image')) {
+            $image_path = $request->file('image')->store('post_images');
+            $validated_data['image'] = $image_path;
+        }
 
+        // ddd($image_path, $validated_data); 
 
         // ddd($validated_data);
         // ddd($request->tags);
@@ -128,10 +134,16 @@ class PostController extends Controller
             $validated_data = $request->validate([
                 'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:200'],
                 'sub_title' => ['nullable'],
-                'image' => ['nullable'],
+                'image' => ['nullable', 'image', 'max:500'],
                 'body' => ['nullable'],
                 'category_id' => ['nullable', 'exists:categories,id'],  
             ]);
+
+            if ($request->file('image')) {
+                Storage::delete($post->image);
+                $image_path = $request->file('image')->store('post_images');
+                $validated_data['image'] = $image_path;
+            }
 
             $validated_data['slug'] = Str::slug($validated_data['title']);
 
@@ -161,6 +173,7 @@ class PostController extends Controller
     {
         //
         if(Auth::id() === $post->user_id) {
+            Storage::delete($post->image);
             $post->delete();
     
             return redirect()->route('admin.posts.index')->with('feedback', 'post succesfully deleted');            
