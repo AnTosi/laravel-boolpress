@@ -6,8 +6,12 @@
             <h1 class="display-3">Contact us</h1>
             <p class="lead">We are here to help you</p>
     </div>
-
     <div class="container">
+        @if(session('feedback'))
+            <div class="alert alert-success">
+                {{session('feedback')}}
+            </div>
+        @endif
         @include('partials.error')
         <form action="{{route('contacts.send')}}" method="post">
             @csrf
@@ -29,9 +33,8 @@
 
                 <div class="mb-3">
                   <label for="message" class="form-label">Message</label>
-                  <textarea class="form-control" name="message" id="message" rows="4">{{old('message')}}'</textarea>
+                  <textarea class="form-control" name="message" id="message" rows="4">{{old('message')}}</textarea>
                 </div>
-
                 <div class="px-3">
                     <button type="submit" class="btn btn-dark w-100">Submit</button>
                 </div>

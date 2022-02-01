@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFormMail;
+use App\Mail\MarkdownContactFormMail;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Markdown;
+use Illuminate\Support\Facades\Mail;
 
 class PageController extends Controller
 {
@@ -23,6 +27,11 @@ class PageController extends Controller
             'message' => 'required|min:10|max:500'
         ]);
 
+        // return (new MarkdownContactFormMail($validated_data))->render();
         // ddd($validated_data);
+        // return (new ContactFormMail($validated_data))->render();
+        Mail::to('admin@example.com')->send(new ContactFormMail($validated_data));
+
+        return redirect()->back()->with('feedback', 'Thanks for your message!');
     }
 }
