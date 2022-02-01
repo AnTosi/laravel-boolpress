@@ -30,7 +30,7 @@ class PageController extends Controller
         // return (new MarkdownContactFormMail($validated_data))->render();
         // ddd($validated_data);
         // return (new ContactFormMail($validated_data))->render();
-        Mail::to('admin@example.com')->send(new ContactFormMail($validated_data));
+        Mail::to('admin@example.com')->send(new MarkdownContactFormMail($validated_data));
 
         return redirect()->back()->with('feedback', 'Thanks for your message!');
     }
