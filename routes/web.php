@@ -25,6 +25,7 @@ Route::get('categories/{category:slug}/posts', 'CategoryController@posts')->name
 Route::get('tags/{tag:slug}/posts', 'TagController@posts')->name('tags.posts');
 
 Route::get('contacts', 'PageController@contacts')->name('contacts');
+Route::post('contacts', 'PageController@sendContactForm')->name('contacts.send');
 
 Auth::routes();
 
