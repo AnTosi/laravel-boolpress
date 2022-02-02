@@ -3,6 +3,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,4 +41,14 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
     Route::resource('posts', PostController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('tags', TagController::class);
+});
+
+
+Route::get('guest/blog', function () {
+    return view('guest.blog');
+})->name('guest.blog');
+
+
+Route::get('guest/blog/{post}', function (Post $post) {
+    return new PostResource(Post::find($post));
 });
