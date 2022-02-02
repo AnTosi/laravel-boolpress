@@ -12,7 +12,7 @@
     @endif
 </div>
 
-<a name="" id="" class="btn btn-primary" href="{{route('admin.products.create')}}" role="button">Create product</a>
+    <a name="" id="" class="btn btn-primary" href="{{route('admin.products.create')}}" role="button">Create product</a>
     <table class="table">
         <thead>
             <tr>
@@ -67,5 +67,7 @@
 
         </tbody>
     </table>
+
+    {{$products->links()}}
     
 @endsection
