@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -16,7 +17,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        return Post::with(['tags'])->paginate(5);
+        return PostResource::collection(Post::with(['category', 'tags'])->paginate());
     }
 
     /**
@@ -46,9 +47,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
         //
+        return new PostResource($post);
     }
 
     /**
