@@ -47,6 +47,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Shop</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('guest.blog')}}">API Blog</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
