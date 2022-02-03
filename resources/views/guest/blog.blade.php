@@ -11,11 +11,12 @@
         <div class="card-body">
             <h4 class="card-title">@{{post.title}}</h4>
             <p class="card-text">@{{post.body}}</p>
-            <p v-if="post.category">@{{post.category.name}}</p>
-            <template v-if="post.tag">
-                <p v-for="tag in post.tags">
+            <p v-if="post.category">Category: @{{post.category.name}}</p>
+            <template v-if="post.tags">
+                <p>Tags:</p>
+                <span v-for="tag in post.tags">
                     @{{tag.name}}
-                </p>
+                </span>
             </template>
         </div>
     </div>

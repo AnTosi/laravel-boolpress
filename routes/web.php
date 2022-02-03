@@ -16,9 +16,14 @@ use App\Models\Post;
 |
 */
 
+//commenting old routes to try out the single page app
+// Route::get('/', function () {
+//     return view('guest.welcome');
+// })->name('home');
+
 Route::get('/', function () {
     return view('guest.welcome');
-})->name('home');
+});
 
 Route::resource('products', ProductController::class)->only(['index', 'show']);
 Route::resource('posts', PostController::class)->only(['index', 'show'])->parameter('posts', 'post:slug');
@@ -52,3 +57,7 @@ Route::get('guest/blog', function () {
 Route::get('guest/blog/{post}', function (Post $post) {
     return new PostResource(Post::find($post));
 });
+
+Route::get('/{any}', function () {
+    return view('guest.welcome');
+})->where('any', '.*');

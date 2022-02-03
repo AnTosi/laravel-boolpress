@@ -4,11 +4,57 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
+
 const { default: Axios } = require('axios');
 
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+
+//Vue router
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
+
+
+//first pages routes
+const Home = Vue.component('Home', require('./pages/Home.vue').default);
+const Contacts = Vue.component('Contacts', require('./pages/Contacts.vue').default);
+const About = Vue.component('About', require('./pages/About.vue').default);
+
+
+//defining routes
+
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: Home,
+    },
+    {
+        path: '/contacts',
+        name: 'contacts',
+        component: Contacts,
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: About,
+    }
+]
+
+//create a router instance
+const router = new VueRouter({
+    mode: 'history',  // <- this is just to remove the # from the url
+    routes
+})
+
+const app = new Vue({
+    el: '#app',
+    router,
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -22,7 +68,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+Vue.component('App', require('./App.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,17 +76,17 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- const app = new Vue({
-    el: '#app',
-    data: {
-        posts: null
-    },
-    mounted() {
-        Axios.get('/api/posts').then(resp => {
-            console.log(resp);
-            this.posts = resp.data.data;
-        }).catch(e => {
-            console.error('Sorry! ' + e);
-        })
-    }
-});
+//  const app = new Vue({
+//     el: '#app',
+//     data: {
+//         posts: null
+//     },
+//     mounted() {
+//         Axios.get('/api/posts').then(resp => {
+//             console.log(resp);
+//             this.posts = resp.data.data;
+//         }).catch(e => {
+//             console.error('Sorry! ' + e);
+//         })
+//     }
+// });
