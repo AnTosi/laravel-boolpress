@@ -51,7 +51,7 @@ class PostController extends Controller
     {
  
 
-            $thisPost = Post::where('id', $post->id)->with('category', 'tags')->first();
+            $thisPost = Post::where('slug', $post->slug)->with('category', 'tags')->first();
             return new PostResource($thisPost);
     }
 
