@@ -49,8 +49,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-        return new PostResource($post);
+ 
+
+            $thisPost = Post::where('id', $post->id)->with('category', 'tags')->first();
+            return new PostResource($thisPost);
     }
 
     /**

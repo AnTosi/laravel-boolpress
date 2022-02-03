@@ -60,6 +60,8 @@ Route::get('/', function () {
     return view('guest.welcome');
 });
 
+Route::get('blog/{post}', 'API\PostController@show');
+
 Route::get('/{any}', function () {
     return view('guest.welcome');
 })->where('any', '.*');

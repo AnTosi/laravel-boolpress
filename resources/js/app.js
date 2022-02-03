@@ -22,9 +22,10 @@ Vue.use(VueRouter);
 
 //first pages routes
 const Home = Vue.component('Home', require('./pages/Home.vue').default);
+const Blog = Vue.component('Blog', require('./pages/Blog.vue').default);
 const Contacts = Vue.component('Contacts', require('./pages/Contacts.vue').default);
 const About = Vue.component('About', require('./pages/About.vue').default);
-
+const PostPage = Vue.component('Post', require('./pages/Post.vue').default);
 
 //defining routes
 
@@ -43,7 +44,18 @@ const routes = [
         path: '/about',
         name: 'about',
         component: About,
-    }
+    },
+    {
+        path: '/blog',
+        name: 'blog',
+        component: Blog
+    },
+    {
+        path: '/post/:slug',
+        name: 'post',
+        component: PostPage
+    },
+
 ]
 
 
@@ -67,7 +79,6 @@ const router = new VueRouter({
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('App', require('./App.vue').default);
-
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 /**

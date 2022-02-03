@@ -8,3 +8,10 @@
 @import '~bootstrap/scss/bootstrap';
 
 
+.blog {
+    img {
+        height: 180px;
+        object-fit: cover;
+        object-position: top;
+    }
+}
