@@ -4,17 +4,18 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-
-
-const { default: Axios } = require('axios');
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
 
+const { default: Axios } = require('axios');
+
+
+
+
 //Vue router
-import Vue from 'vue';
+// import Vue from 'vue';
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
@@ -45,16 +46,14 @@ const routes = [
     }
 ]
 
+
 //create a router instance
 const router = new VueRouter({
     mode: 'history',  // <- this is just to remove the # from the url
     routes
 })
 
-const app = new Vue({
-    el: '#app',
-    router,
-})
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -67,7 +66,6 @@ const app = new Vue({
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('App', require('./App.vue').default);
 
 /**
@@ -75,6 +73,11 @@ Vue.component('App', require('./App.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+const app = new Vue({
+    el: '#app',
+    router,
+})
 
 //  const app = new Vue({
 //     el: '#app',

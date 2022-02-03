@@ -21,9 +21,6 @@ use App\Models\Post;
 //     return view('guest.welcome');
 // })->name('home');
 
-Route::get('/', function () {
-    return view('guest.welcome');
-});
 
 Route::resource('products', ProductController::class)->only(['index', 'show']);
 Route::resource('posts', PostController::class)->only(['index', 'show'])->parameter('posts', 'post:slug');
@@ -56,6 +53,11 @@ Route::get('guest/blog', function () {
 
 Route::get('guest/blog/{post}', function (Post $post) {
     return new PostResource(Post::find($post));
+});
+
+
+Route::get('/', function () {
+    return view('guest.welcome');
 });
 
 Route::get('/{any}', function () {
