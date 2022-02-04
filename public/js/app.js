@@ -5151,13 +5151,13 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get("api/posts").then(function (response) {
-      console.log(response);
+      // console.log(response);
       _this.posts = response.data.data;
       _this.meta = response.data.meta;
       _this.links = response.data.links;
       _this.loading = false;
-    });
-    console.log("Component mounted.");
+    }); // console.log("Component mounted.");
+    // console.log(this.meta);
   }
 });
 
@@ -5299,6 +5299,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -5309,11 +5321,14 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    // Call the api for the single post
+    console.log('componente montato'); // Call the api for the single post
+
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/posts/' + this.$route.params.slug).then(function (resp) {
-      console.log(_this.$route.params.slug);
+      // console.log(this.$route.params.slug);
       console.log(resp);
-      _this.post = resp.data;
+      _this.post = resp.data.data;
+    })["catch"](function (error) {
+      console.log('oops');
     });
   }
 });
@@ -41597,10 +41612,12 @@ var render = function () {
           "div",
           { key: post.slug, staticClass: "card col-2 p-0 m-2" },
           [
-            _c("img", {
-              staticClass: "card-img-top",
-              attrs: { src: "/storage/" + post.image, alt: "" },
-            }),
+             true
+              ? _c("img", {
+                  staticClass: "card-img-top",
+                  attrs: { src: "/storage/" + post.image, alt: "" },
+                })
+              : undefined,
             _vm._v(" "),
             _c(
               "div",
@@ -41848,12 +41865,45 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "container" }, [
     _c("img", { attrs: { src: "/storage/" + _vm.post.image, alt: "" } }),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("h3", [_vm._v("Cane " + _vm._s(_vm.post.title))]),
-    ]),
+    _c(
+      "div",
+      {},
+      [
+        _c("h3", [_vm._v(_vm._s(_vm.post.title))]),
+        _vm._v(" "),
+        _c("p", [_vm._v(" " + _vm._s(_vm.post.body))]),
+        _vm._v(" "),
+        _vm.post.category
+          ? [
+              _vm._v("Category: \n            "),
+              _c("p", [_vm._v("@" + _vm._s(_vm.post.category.name))]),
+            ]
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.post.tags
+          ? [
+              _vm._v("\n            Tags:\n            "),
+              _c(
+                "p",
+                _vm._l(_vm.post.tags, function (tag) {
+                  return _c("span", { key: tag.slug }, [
+                    _vm._v(
+                      "\n                @" +
+                        _vm._s(tag.name) +
+                        "\n                "
+                    ),
+                  ])
+                }),
+                0
+              ),
+            ]
+          : _vm._e(),
+      ],
+      2
+    ),
   ])
 }
 var staticRenderFns = []
@@ -57358,8 +57408,8 @@ var routes = [{
   name: 'blog',
   component: Blog
 }, {
-  path: '/post/:slug',
-  name: 'post',
+  path: '/blog/:slug',
+  name: 'single-post',
   component: PostPage
 }]; //create a router instance
 
@@ -57455,15 +57505,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!***************************************************!*\
   !*** ./resources/js/components/BlogComponent.vue ***!
   \***************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BlogComponent_vue_vue_type_template_id_66ef69a0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BlogComponent.vue?vue&type=template&id=66ef69a0& */ "./resources/js/components/BlogComponent.vue?vue&type=template&id=66ef69a0&");
 /* harmony import */ var _BlogComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BlogComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/BlogComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _BlogComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _BlogComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57493,7 +57542,7 @@ component.options.__file = "resources/js/components/BlogComponent.vue"
 /*!****************************************************************************!*\
   !*** ./resources/js/components/BlogComponent.vue?vue&type=script&lang=js& ***!
   \****************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
