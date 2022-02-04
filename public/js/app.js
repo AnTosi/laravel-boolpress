@@ -5140,6 +5140,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -41608,10 +41610,8 @@ var render = function () {
       "div",
       { staticClass: "row flex-wrap" },
       _vm._l(_vm.posts, function (post) {
-        return _c(
-          "div",
-          { key: post.slug, staticClass: "card col-2 p-0 m-2" },
-          [
+        return _c("div", { key: post.slug, staticClass: "col-3 p-2" }, [
+          _c("div", { staticClass: "card" }, [
              true
               ? _c("img", {
                   staticClass: "card-img-top",
@@ -41640,9 +41640,9 @@ var render = function () {
                       _vm._l(post.tags, function (tag) {
                         return _c("span", { key: tag.slug }, [
                           _vm._v(
-                            "\n                        @" +
+                            "\n                            @" +
                               _vm._s(tag.name) +
-                              "\n                    "
+                              "\n                        "
                           ),
                         ])
                       }),
@@ -41661,8 +41661,8 @@ var render = function () {
               ],
               2
             ),
-          ]
-        )
+          ]),
+        ])
       }),
       0
     ),
