@@ -51,8 +51,8 @@ const routes = [
         component: Blog
     },
     {
-        path: '/post/:slug',
-        name: 'post',
+        path: '/blog/:slug',
+        name: 'single-post',
         component: PostPage
     },
 
