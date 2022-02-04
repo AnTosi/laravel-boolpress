@@ -5142,24 +5142,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       loading: true,
-      posts: null
+      posts: [],
+      meta: [],
+      links: [],
+      baseUrl: "/api/posts"
     };
   },
-  mounted: function mounted() {
-    var _this = this;
+  methods: {
+    fetchPosts: function fetchPosts(url) {
+      var _this = this;
 
-    axios.get("api/posts").then(function (response) {
-      // console.log(response);
-      _this.posts = response.data.data;
-      _this.meta = response.data.meta;
-      _this.links = response.data.links;
-      _this.loading = false;
-    }); // console.log("Component mounted.");
+      axios.get(url).then(function (response) {
+        // console.log(response);
+        _this.posts = response.data.data;
+        _this.meta = response.data.meta;
+        _this.links = response.data.links;
+        _this.loading = false;
+      });
+    },
+    prevPage: function prevPage() {
+      this.fetchPosts(this.links.prev);
+    },
+    nextPage: function nextPage() {
+      this.fetchPosts(this.links.next);
+    },
+    goToPage: function goToPage(pageN) {
+      this.fetchPosts(this.baseUrl + '?page=' + pageN);
+    }
+  },
+  mounted: function mounted() {
+    // console.log("Component mounted.");
     // console.log(this.meta);
+    // console.log(this.baseUrl);
+    this.fetchPosts(this.baseUrl);
   }
 });
 
@@ -41665,6 +41689,63 @@ var render = function () {
         ])
       }),
       0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "text-center" },
+      [
+        _vm.links.prev
+          ? _c(
+              "span",
+              {
+                staticClass: "btn text-muted",
+                on: {
+                  click: function ($event) {
+                    return _vm.prevPage()
+                  },
+                },
+              },
+              [_vm._v("Prev")]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm._l(_vm.meta.last_page, function (pageN) {
+          return _c(
+            "span",
+            {
+              key: pageN.id,
+              staticClass: "btn",
+              class:
+                pageN === _vm.meta.current_page
+                  ? "btn-primary text-white"
+                  : "text-muted",
+              on: {
+                click: function ($event) {
+                  return _vm.goToPage(pageN)
+                },
+              },
+            },
+            [_vm._v(_vm._s(pageN))]
+          )
+        }),
+        _vm._v(" "),
+        _vm.links.next
+          ? _c(
+              "span",
+              {
+                staticClass: "btn text-muted",
+                on: {
+                  click: function ($event) {
+                    return _vm.nextPage()
+                  },
+                },
+              },
+              [_vm._v("Next")]
+            )
+          : _vm._e(),
+      ],
+      2
     ),
   ])
 }

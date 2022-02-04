@@ -20,6 +20,11 @@
                 </div>
             </div>
         </div>
+        <div class="text-center">
+            <span class="btn text-muted" @click="prevPage()" v-if="links.prev">Prev</span>
+            <span class="btn" :class="pageN === meta.current_page ? 'btn-primary text-white' : 'text-muted'" v-for="pageN in meta.last_page" :key="pageN.id" @click="goToPage(pageN)">{{ pageN }}</span>
+            <span class="btn text-muted" @click="nextPage()" v-if="links.next">Next</span>
+        </div>
     </section>
 </template>
 
@@ -28,19 +33,45 @@ export default {
     data() {
         return {
             loading: true,
-            posts: null,
+            posts: [],
+            meta: [],
+            links: [],
+            baseUrl: "/api/posts",
         };
     },
-    mounted() {
-        axios.get("api/posts").then((response) => {
+
+    methods: {
+        
+        fetchPosts(url){
+            axios.get(url).then((response) => {
             // console.log(response);
             this.posts = response.data.data;
             this.meta = response.data.meta;
             this.links = response.data.links;
             this.loading = false;
-        });
+        })
+        },
+
+        prevPage(){
+            this.fetchPosts(this.links.prev)
+        },
+
+        nextPage(){
+            this.fetchPosts(this.links.next)
+        },
+
+        goToPage(pageN){
+            this.fetchPosts(this.baseUrl + '?page=' + pageN)
+        }
+
+    },
+
+    mounted() {
+        
         // console.log("Component mounted.");
         // console.log(this.meta);
+        // console.log(this.baseUrl);
+        this.fetchPosts(this.baseUrl);
     },
 };
 </script>
