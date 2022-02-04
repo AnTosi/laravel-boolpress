@@ -2,7 +2,7 @@
     <section class="blog">
         <div class="row flex-wrap">
             <div class="card col-2 p-0 m-2" v-for="post in posts" :key="post.slug">
-                <img class="card-img-top" :src="'/storage/' + post.image" alt="">
+                <img class="card-img-top" :src="'/storage/' + post.image" alt="" v-if="'/storage/' + post.image">
                 <div class="card-body">
                     <h4 class="card-title">@{{post.title}}</h4>
                     <p v-if="post.category">Category: @{{post.category.name}}</p>
@@ -31,13 +31,14 @@ export default {
     },
     mounted() {
         axios.get("api/posts").then((response) => {
-            console.log(response);
+            // console.log(response);
             this.posts = response.data.data;
             this.meta = response.data.meta;
             this.links = response.data.links;
             this.loading = false;
         });
-        console.log("Component mounted.");
+        // console.log("Component mounted.");
+        // console.log(this.meta);
     },
 };
 </script>
