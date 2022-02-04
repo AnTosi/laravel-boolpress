@@ -1,5 +1,5 @@
 @extends('layouts.spa')
 
 @section('content')
-    <app></app>
+    <App></App>
 @endsection
